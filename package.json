@@ -1,0 +1,13 @@
+{
+  "name": "tukul",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "cd client && npm start",
+    "build": "cd client && npm build",
+    "test": "cd client &&  npm test"
+  },
+  "dependencies": {
+    "pg": "^8.3.3"
+  }
+}

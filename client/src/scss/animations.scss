@@ -1,0 +1,14 @@
+@keyframes fadein {
+    from {
+        /* margin-left: 100%;
+        left:0 */
+       opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+
+.page {
+    animation: 3s fadein 1 alternate ease-in;
+  }
