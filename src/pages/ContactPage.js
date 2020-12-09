@@ -18,7 +18,7 @@ export default class ContactPage extends Component {
         this._recaptchaRef = React.createRef();
         this.handleChange  = this.handleChange.bind(this);
         this.handleSubmit  = this.handleSubmit.bind(this);
-        this.addComment    = this.addComment.bind(this);
+        this.addMessage    = this.addMessage.bind(this);
         this.state = {
             callback: "not fired",
             value: '',
@@ -27,7 +27,7 @@ export default class ContactPage extends Component {
           };
         this.userName = React.createRef();
         this.email    = React.createRef();
-        this.comments = React.createRef();
+        this.message = React.createRef();
         this.phone    = React.createRef();
     }
 
@@ -38,17 +38,17 @@ export default class ContactPage extends Component {
         console.debug("didMount - reCaptcha Ref-", this._reCaptchaRef);
       }
 
-    addComment = async () => {
+    addMessage = async () => {
         try {
             await API.graphql(graphqlOperation(createInquiry, {input : {
                 name: this.userName.current.value,
                 phone: this.phone.current.value, 
                 email:this.email.current.value,
-                message:this.comments.current.value
+                message:this.message.current.value
             }}));
 
             this.setState({
-                            commentSubmitted: true
+                            messageSubmitted: true
                         });
             
         }
@@ -62,15 +62,15 @@ export default class ContactPage extends Component {
     //     },
     //     "referrer": "http://localhost:3000/contact",
     //     "referrerPolicy": "no-referrer-when-downgrade",
-    //     "body": "{\"name\":\"foo\",\"email\":\"foo@foo.com\",\"comment\":\"This is my message\"}",
+    //     "body": "{\"name\":\"foo\",\"email\":\"foo@foo.com\",\"message\":\"This is my message\"}",
     //     "method": "POST",
     //     "mode": "cors",
     //     "credentials": "omit"
     //   });
     handleSubmit(event) {
         event.preventDefault();
-        console.debug("Submitting contact comments...");
-        this.addComment()
+        console.debug("Submitting contact messages...");
+        this.addMessage()
         // const myHeaders = new Headers();
 
         // myHeaders.append('x-api-key', 'KEY_HERE');
@@ -82,18 +82,18 @@ export default class ContactPage extends Component {
         //     body: JSON.stringify({
         //         name: this.userName.current.value, 
         //         email:this.email.current.value,
-        //         comment:this.comments.current.value
+        //         message:this.messages.current.value
         //     }),
         //     async: true
         // }).then(
         //     res => {
         //         this.setState({
-        //             commentSubmitted: true
+        //             messageSubmitted: true
         //         })
         //     }
         // ).catch(err => {
         //     this.setState({
-        //         commentSubmitted: false,
+        //         messageSubmitted: false,
         //         error: err
         //     })
         // });
@@ -111,14 +111,14 @@ export default class ContactPage extends Component {
         const { value, /*callback,*/ load, expired } = this.state || {};
         return (
            <Container>
-            {this.state.commentSubmitted &&
+            {this.state.messageSubmitted &&
             <Jumbotron>
                 <div className="alert alert-success">
-                    Thanks for your comment. Our support team will get back to you shortly.
+                    Thanks for your message. Our support team will get back to you shortly.
                 </div>
             </Jumbotron>
             }
-            { !this.state.commentSubmitted  &&
+            { !this.state.messageSubmitted  &&
              <Form onSubmit={this.handleSubmit} method="Post" action="http://localhost:8001">
                     <Form.Group controlId="formBasicEmail">
                         <Form.Label>Name</Form.Label>
@@ -140,14 +140,14 @@ export default class ContactPage extends Component {
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>Your Message</Form.Label>
-                        <Form.Control ref={this.comments} as="textarea" rows="5"  required/>
+                        <Form.Control ref={this.message} as="textarea" rows="5"  required/>
                     </Form.Group>
                     {/* <div>
                         {value} {"" + load} {expired}
                     </div> */}
                     {this.state.error && 
                         <div class="alert alert-danger" role="alert">
-                            Failed to register comment. Please try again.
+                            Failed to register message. Please try again.
                         </div>
                     }
                     <div>
