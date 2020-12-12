@@ -1,0 +1,51 @@
+
+server {
+   listen 80 default_server;
+   root /var/www/html/build;
+   server_name [server_IP][your.domain.com] [your other domain if you want to];
+   index index.html index.htm;
+   location / {
+   }
+}
+location /files/ { 
+   autoindex on;
+   root /var/www/html/files;
+}
+server {
+   listen 80 default_server;
+   root /var/www/html/build;
+   server_name [server_IP][your.domain.com] [your other domain if you want to];
+   index index.html index.htm;
+   location / {
+   }
+}
+location /files/ { 
+   autoindex on;
+   root /var/www/html/files;
+}
+
+GraphQL endpoint: https://rzotsqmqtjav5g22lcm3yz5zry.appsync-api.us-east-1.amazonaws.com/graphql
+GraphQL API KEY: da2-poxavz2fczffndfrytlxc6pdxq
+
+
+curl -XPOST https://rzotsqmqtjav5g22lcm3yz5zry.appsync-api.us-east-1.amazonaws.com/graphql \
+-H "Content-Type:application/graphql" \
+-H "x-api-key:da2-poxavz2fczffndfrytlxc6pdxq" \
+-d '{
+    "query": "{AllInquiries {name,message}}"
+}'
+
+
+
+
+curl -XPOST https://rzotsqmqtjav5g22lcm3yz5zry.appsync-api.us-east-1.amazonaws.com/graphql \
+-H "Content-Type:application/graphql" \
+-H "x-api-key:da2-poxavz2fczffndfrytlxc6pdxq" \
+-d '{
+    "query": "{ Mutations{ createInquiry(name: \"Jhon Doe\", email: \"jhon@jhonDoe.com\", phone: \"12323213232\", message: \"what an awesome website!!\"}"
+}'
+
+
+curl -XPOST https://rzotsqmqtjav5g22lcm3yz5zry.appsync-api.us-east-1.amazonaws.com/graphql -H "Content-Type:application/graphql" -H "x-api-key:da2-poxavz2fczffndfrytlxc6pdxq" -d '{
+    "query": "mutation { createInquiry(name: \"Jhon Doe\", email: \"jhon@jhonDoe.com\", phone: \"12323213232\", message: \"what an awesome website!!\") } {id} "
+}'
