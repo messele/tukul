@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import ReCAPTCHA  from 'react-google-recaptcha'
 import { Form, Container, Button, Jumbotron } from "react-bootstrap";
-import Amplify, { API, graphqlOperation }                                from  'aws-amplify';
-import  awsconfig                             from '../aws-exports';
-import {createInquiry}                        from '../graphql/mutations'
+// import Amplify, { API, graphqlOperation }                                from  'aws-amplify';
+// import  awsconfig                             from '../aws-exports';
+// import {createInquiry}                        from '../graphql/mutations'
 
 
-Amplify.configure(awsconfig);
+// Amplify.configure(awsconfig);
 
 const DELAY = 1500;
 //const TEST_SITE_KEY = "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI";
@@ -18,7 +18,7 @@ export default class ContactPage extends Component {
         this._recaptchaRef = React.createRef();
         this.handleChange  = this.handleChange.bind(this);
         this.handleSubmit  = this.handleSubmit.bind(this);
-        this.addMessage    = this.addMessage.bind(this);
+       // this.addMessage    = this.addMessage.bind(this);
         this.state = {
             callback: "not fired",
             value: '',
@@ -38,24 +38,24 @@ export default class ContactPage extends Component {
         console.debug("didMount - reCaptcha Ref-", this._reCaptchaRef);
       }
 
-    addMessage = async () => {
-        try {
-            await API.graphql(graphqlOperation(createInquiry, {input : {
-                name: this.userName.current.value,
-                phone: this.phone.current.value, 
-                email:this.email.current.value,
-                message:this.message.current.value
-            }}));
+    // addMessage = async () => {
+    //     try {
+    //         await API.graphql(graphqlOperation(createInquiry, {input : {
+    //             name: this.userName.current.value,
+    //             phone: this.phone.current.value, 
+    //             email:this.email.current.value,
+    //             message:this.message.current.value
+    //         }}));
 
-            this.setState({
-                            messageSubmitted: true
-                        });
+    //         this.setState({
+    //                         messageSubmitted: true
+    //                     });
             
-        }
-        catch(error) {
-            console.error(error);
-        }
-    }  
+    //     }
+    //     catch(error) {
+    //         console.error(error);
+    //     }
+    // }  
     //   fetch("http://localhost:8001/", {
     //     "headers": {
     //       "content-type": "application/json"
@@ -70,7 +70,7 @@ export default class ContactPage extends Component {
     handleSubmit(event) {
         event.preventDefault();
         console.debug("Submitting contact messages...");
-        this.addMessage()
+        //this.addMessage()
         // const myHeaders = new Headers();
 
         // myHeaders.append('x-api-key', 'KEY_HERE');
