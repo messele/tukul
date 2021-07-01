@@ -15,6 +15,11 @@ import HomePage from './pages/HomePage';
 //import Layout                                     from './Layout';
 import Header from './components/Header';
 import Footer from './components/Footer';
+// import Amplify                                from  'aws-amplify';
+// import  awsconfig                             from 'aws-exports';
+
+
+// Amplify.configure(awsconfig);
 // import Container from 'react-bootstrap/Container';
 // import Navbar from 'react-bootstrap/Navbar'
 // import Nav from 'react-bootstrap/Nav'
