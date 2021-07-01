@@ -9,6 +9,9 @@ export const onCreateInquiry = /* GraphQL */ `
       email
       phone
       message
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -22,6 +25,9 @@ export const onUpdateInquiry = /* GraphQL */ `
       email
       phone
       message
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -35,6 +41,9 @@ export const onDeleteInquiry = /* GraphQL */ `
       email
       phone
       message
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
     }

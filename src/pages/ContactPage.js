@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import ReCAPTCHA  from 'react-google-recaptcha'
-import { Form, Container, Button, Jumbotron, Dropdown } from "react-bootstrap";
-// import Amplify, { API, graphqlOperation }                                from  'aws-amplify';
-// import  awsconfig                             from '../aws-exports';
-// import {createInquiry}                        from '../graphql/mutations'
+import { Form, Container, Button, Jumbotron } from "react-bootstrap";
+import Amplify, { API, graphqlOperation }                                from  'aws-amplify';
+import  awsconfig                             from '../aws-exports';
+import {createInquiry}                        from '../graphql/mutations'
 
 
-// Amplify.configure(awsconfig);
+Amplify.configure(awsconfig);
 
 const DELAY = 1500;
 //const TEST_SITE_KEY = "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI";
@@ -38,66 +38,35 @@ export default class ContactPage extends Component {
         console.debug("didMount - reCaptcha Ref-", this._reCaptchaRef);
       }
 
-    // addMessage = async () => {
-    //     try {
-    //         await API.graphql(graphqlOperation(createInquiry, {input : {
-    //             name: this.userName.current.value,
-    //             phone: this.phone.current.value, 
-    //             email:this.email.current.value,
-    //             message:this.message.current.value
-    //         }}));
+    addMessage = async () => {
+        try {
+            await API.graphql(graphqlOperation(createInquiry, {input : {
+                name: this.userName.current.value,
+                phone: this.phone.current.value, 
+                email:this.email.current.value,
+                message:this.message.current.value
+            }}));
 
-    //         this.setState({
-    //                         messageSubmitted: true
-    //                     });
+            this.setState({
+                            messageSubmitted: true
+                        });
             
-    //     }
-    //     catch(error) {
-    //         console.error(error);
-    //     }
-    // }  
-    //   fetch("http://localhost:8001/", {
-    //     "headers": {
-    //       "content-type": "application/json"
-    //     },
-    //     "referrer": "http://localhost:3000/contact",
-    //     "referrerPolicy": "no-referrer-when-downgrade",
-    //     "body": "{\"name\":\"foo\",\"email\":\"foo@foo.com\",\"message\":\"This is my message\"}",
-    //     "method": "POST",
-    //     "mode": "cors",
-    //     "credentials": "omit"
-    //   });
+        }
+        catch(error) {
+            console.error(error);
+            this.setState({
+                error : true
+            })
+        }
+    }  
+
     handleSubmit(event) {
         event.preventDefault();
+        this.setState({
+            error: false
+        })
         console.debug("Submitting contact messages...");
-        //this.addMessage()
-        // const myHeaders = new Headers();
-
-        // myHeaders.append('x-api-key', 'KEY_HERE');
-        // myHeaders.append('Content-Type', 'application/json');
-        // myHeaders.append('cache-control', 'no-cache');
-        // fetch("http://localhost:8001", {
-        //     method: 'POST',
-        //     headers:myHeaders,
-        //     body: JSON.stringify({
-        //         name: this.userName.current.value, 
-        //         email:this.email.current.value,
-        //         message:this.messages.current.value
-        //     }),
-        //     async: true
-        // }).then(
-        //     res => {
-        //         this.setState({
-        //             messageSubmitted: true
-        //         })
-        //     }
-        // ).catch(err => {
-        //     this.setState({
-        //         messageSubmitted: false,
-        //         error: err
-        //     })
-        // });
-       
+        this.addMessage()
     }
     handleChange(value) {
 
@@ -147,7 +116,7 @@ export default class ContactPage extends Component {
                         {value} {"" + load} {expired}
                     </div> */}
                     {this.state.error && 
-                        <div class="alert alert-danger" role="alert">
+                        <div className="alert alert-danger" role="alert">
                             Failed to register message. Please try again.
                         </div>
                     }

@@ -12,6 +12,9 @@ export const createInquiry = /* GraphQL */ `
       email
       phone
       message
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -28,6 +31,9 @@ export const updateInquiry = /* GraphQL */ `
       email
       phone
       message
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -44,6 +50,9 @@ export const deleteInquiry = /* GraphQL */ `
       email
       phone
       message
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
     }
