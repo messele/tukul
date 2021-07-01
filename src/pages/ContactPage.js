@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import ReCAPTCHA  from 'react-google-recaptcha'
-import { Form, Container, Button, Jumbotron } from "react-bootstrap";
+import { Form, Container, Button, Jumbotron, Dropdown } from "react-bootstrap";
 // import Amplify, { API, graphqlOperation }                                from  'aws-amplify';
 // import  awsconfig                             from '../aws-exports';
 // import {createInquiry}                        from '../graphql/mutations'
@@ -118,6 +118,7 @@ export default class ContactPage extends Component {
                 </div>
             </Jumbotron>
             }
+        
             { !this.state.messageSubmitted  &&
              <Form onSubmit={this.handleSubmit} method="Post" action="http://localhost:8001">
                     <Form.Group controlId="formBasicEmail">
